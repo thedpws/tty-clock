@@ -92,11 +92,7 @@ init(void)
           ttyclock.geo.b = 1;
      ttyclock.geo.w = (ttyclock.option.second) ? SECFRAMEW : NORMFRAMEW;
      ttyclock.geo.h = 7;
-     ttyclock.tm = localtime(&(ttyclock.lt));
-     if(ttyclock.option.utc) {
-          ttyclock.tm = gmtime(&(ttyclock.lt));
-     }
-     ttyclock.lt = time(NULL);
+     ttyclock.start_lt = time(NULL);
      update_hour();
 
      /* Create clock win */
@@ -172,22 +168,13 @@ update_hour(void)
      int ihour;
      char tmpstr[128];
 
-     ttyclock.lt = time(NULL);
-     ttyclock.tm = localtime(&(ttyclock.lt));
-     if(ttyclock.option.utc) {
-          ttyclock.tm = gmtime(&(ttyclock.lt));
-     }
+     time_t lt = time(NULL) - ttyclock.start_lt;
+
+     ttyclock.tm = gmtime(&(lt));
 
      ihour = ttyclock.tm->tm_hour;
 
-     if(ttyclock.option.twelve)
-          ttyclock.meridiem = ((ihour >= 12) ? PMSIGN : AMSIGN);
-     else
-          ttyclock.meridiem = "\0";
-
-     /* Manage hour for twelve mode */
-     ihour = ((ttyclock.option.twelve && ihour > 12)  ? (ihour - 12) : ihour);
-     ihour = ((ttyclock.option.twelve && !ihour) ? 12 : ihour);
+     ttyclock.meridiem = "\0";
 
      /* Set hour */
      ttyclock.date.hour[0] = ihour / 10;

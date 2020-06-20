@@ -106,7 +106,7 @@ typedef struct
 
      /* time.h utils */
      struct tm *tm;
-     time_t lt;
+     time_t start_lt;
 
      /* Clock member */
      char *meridiem;
