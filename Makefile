@@ -1,10 +1,10 @@
 #TTY-Clock MakeFile
 #Under BSD License
-#See clock.c for the license detail.
+#See stopwatch.c for the license detail.
 
-SRC = ttyclock.c
+SRC = ttystopwatch.c
 CC ?= gcc
-BIN ?= tty-clock
+BIN ?= tty-stopwatch
 PREFIX ?= /usr/local
 INSTALLPATH ?= ${DESTDIR}${PREFIX}/bin
 MANPATH ?= ${DESTDIR}${PREFIX}/share/man/man1
@@ -26,7 +26,7 @@ else
 	LDFLAGS += $$(pkg-config --libs ncurses)
 endif
 
-tty-clock : ${SRC}
+tty-stopwatch : ${SRC}
 
 	@echo "building ${SRC}"
 	${CC} ${CFLAGS} ${SRC} -o ${BIN} ${LDFLAGS}

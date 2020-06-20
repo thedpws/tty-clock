@@ -1,6 +1,6 @@
 /*
  *      TTY-CLOCK headers file.
- *      Copyright © 2009-2013 tty-clock contributors
+ *      Copyright © 2009-2013 tty-stopwatch contributors
  *      Copyright © 2008-2009 Martin Duquesnoy <xorg62@gmail.com>
  *      All rights reserved.
  *
@@ -56,7 +56,7 @@
 #define AMSIGN     " [AM]"
 #define PMSIGN     " [PM]"
 
-/* Global ttyclock struct */
+/* Global ttystopwatch struct */
 typedef struct
 {
      /* while() boolean */
@@ -91,7 +91,7 @@ typedef struct
      struct
      {
           int x, y, w, h;
-          /* For rebound use (see clock_rebound())*/
+          /* For rebound use (see stopwatch_rebound())*/
           int a, b;
      } geo;
 
@@ -113,22 +113,22 @@ typedef struct
      WINDOW *framewin;
      WINDOW *datewin;
 
-} ttyclock_t;
+} ttystopwatch_t;
 
 /* Prototypes */
 void init(void);
 void signal_handler(int signal);
 void update_hour(void);
 void draw_number(int n, int x, int y);
-void draw_clock(void);
-void clock_move(int x, int y, int w, int h);
+void draw_stopwatch(void);
+void stopwatch_move(int x, int y, int w, int h);
 void set_second(void);
 void set_center(bool b);
 void set_box(bool b);
 void key_event(void);
 
 /* Global variable */
-ttyclock_t ttyclock;
+ttystopwatch_t ttystopwatch;
 
 /* Number matrix */
 const bool number[][15] =
