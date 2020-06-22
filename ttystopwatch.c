@@ -92,7 +92,8 @@ init(void)
           ttystopwatch.geo.b = 1;
      ttystopwatch.geo.w = (ttystopwatch.option.second) ? SECFRAMEW : NORMFRAMEW;
      ttystopwatch.geo.h = 7;
-     ttystopwatch.start_lt = time(NULL);
+     if (!ttystopwatch.start_lt)
+          ttystopwatch.start_lt = time(NULL);
      update_hour();
 
      /* Create stopwatch win */
